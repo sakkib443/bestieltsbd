@@ -326,33 +326,33 @@ export default function HomePage() {
                                 className="inline-flex items-center gap-2 bg-[#C4122F]/[0.06] border border-[#C4122F]/10 rounded-full px-4 py-1.5 mb-6"
                             >
                                 <span className="w-1.5 h-1.5 bg-[#C4122F] rounded-full animate-pulse"></span>
-                                <span className="text-[#C4122F]/70 text-[11px] font-semibold uppercase tracking-widest">Bangladesh's Trusted IELTS Mock Test</span>
+                                <span className="text-[#C4122F]/70 text-[11px] font-semibold uppercase tracking-widest">🇧🇩 বাংলাদেশের #1 IELTS Mock Test Platform</span>
                             </motion.div>
 
                             {/* Main Heading — Smaller */}
                             <h1 className="text-3xl md:text-[2.5rem] lg:text-[2.85rem] font-extrabold text-slate-900 leading-[1.15] tracking-tight mb-5">
-                                Achieve Your Dream
+                                বিদেশে যাওয়ার স্বপ্ন?
                                 <br />
                                 <span className="text-transparent bg-clip-text" style={{
                                     backgroundImage: 'linear-gradient(135deg, #C4122F, #E8354F, #C4122F)'
                                 }}>
-                                    IELTS Score
+                                    IELTS-এ সাফল্য
                                 </span>
-                                {" "}with Us
+                                {" "}পান আমাদের সাথে
                             </h1>
 
                             <p className="text-slate-500 text-base md:text-lg leading-relaxed mb-8 max-w-lg">
-                                Practice with our computer-based IELTS mock test —
-                                realistic exam environment, instant Listening & Reading scores,
-                                and expert Writing evaluation.
+                                UK, Canada, Australia বা যেকোনো দেশে যাওয়ার জন্য
+                                আমাদের <strong className="text-slate-700">Computer-Based IELTS Mock Test</strong> দিন —
+                                Real Exam-এর মতো পরিবেশে, তাৎক্ষণিক স্কোর সহ।
                             </p>
 
                             {/* Stats */}
                             <div className="flex items-center gap-8 md:gap-10">
                                 {[
-                                    { value: "5,000+", label: "Students Tested" },
-                                    { value: "Band 7+", label: "Avg. Score" },
-                                    { value: "24/7", label: "Available" },
+                                    { value: "৫,০০০+", label: "পরীক্ষার্থী" },
+                                    { value: "Band 7+", label: "গড় স্কোর" },
+                                    { value: "২৪/৭", label: "যেকোনো সময়" },
                                 ].map((stat, i) => (
                                     <motion.div
                                         key={i}
