@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 // API Base URL
-const API_BASE = "http://localhost:5000/api";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "https://bac-itets-exam-server-eqtt.vercel.app/api";
 
 // Async Thunks
 export const loginUser = createAsyncThunk(
@@ -15,7 +15,7 @@ export const loginUser = createAsyncThunk(
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Login failed");
-      
+
       // Store token in localStorage
       if (data?.data?.token) {
         localStorage.setItem("token", data.data.token);
@@ -66,14 +66,14 @@ export const refreshToken = createAsyncThunk(
       const token = localStorage.getItem("token");
       const res = await fetch(`${API_BASE}/auth/refresh`, {
         method: "POST",
-        headers: { 
+        headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${token}`
         },
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Token refresh failed");
-      
+
       if (data?.data?.token) {
         localStorage.setItem("token", data.data.token);
       }
@@ -166,7 +166,7 @@ const authSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     });
-    
+
     // Register
     builder.addCase(registerUser.pending, (state) => {
       state.isLoading = true;
@@ -180,7 +180,7 @@ const authSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     });
-    
+
     // Logout
     builder.addCase(logoutUser.fulfilled, (state) => {
       state.user = null;
@@ -188,7 +188,7 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       state.role = null;
     });
-    
+
     // Refresh Token
     builder.addCase(refreshToken.fulfilled, (state, action) => {
       state.token = action.payload.token;

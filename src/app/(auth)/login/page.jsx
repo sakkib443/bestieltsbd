@@ -2,9 +2,27 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { MdOutlineRemoveRedEye, MdOutlineVisibilityOff } from "react-icons/md";
-import { FiMail, FiLock, FiAlertCircle } from "react-icons/fi";
 import { useRouter } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  FiMail,
+  FiLock,
+  FiAlertCircle,
+  FiArrowLeft,
+  FiArrowRight,
+  FiEye,
+  FiEyeOff,
+} from "react-icons/fi";
+import {
+  FaCheckCircle,
+  FaShieldAlt,
+  FaUserGraduate,
+  FaHeadphones,
+  FaBook,
+  FaPen,
+} from "react-icons/fa";
+import { LuShieldCheck } from "react-icons/lu";
+import { HiOutlineDocumentText } from "react-icons/hi";
 import { authAPI } from "@/lib/api";
 import Logo from "@/components/Logo";
 
@@ -21,11 +39,6 @@ const Login = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
   const [isChecking, setIsChecking] = useState(true);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   // Check if already logged in
   useEffect(() => {
@@ -131,9 +144,9 @@ const Login = () => {
   // Show loading while checking auth
   if (isChecking) {
     return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+      <div className="min-h-screen bg-[#fdfbf9] flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-10 w-10 border-2 border-cyan-400 border-t-transparent mx-auto mb-3"></div>
+          <div className="animate-spin rounded-full h-10 w-10 border-2 border-[#C4122F] border-t-transparent mx-auto mb-3"></div>
           <p className="text-slate-400 text-sm">Loading...</p>
         </div>
       </div>
@@ -141,303 +154,471 @@ const Login = () => {
   }
 
   return (
-    <div className="min-h-screen relative overflow-hidden flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #0a0f1c 0%, #0d1b2a 30%, #1a1a3e 60%, #0d1b2a 100%)' }}>
+    <div
+      className="min-h-screen relative overflow-hidden flex flex-col"
+      style={{ fontFamily: "var(--font-poppins), sans-serif" }}
+    >
+      {/* Background — Matching homepage warm theme */}
+      <div className="absolute inset-0 bg-[#fdfbf9]">
+        {/* Animated soft gradient blobs */}
+        <motion.div
+          animate={{
+            x: [0, 30, -20, 0],
+            y: [0, -25, 15, 0],
+            scale: [1, 1.1, 0.95, 1],
+          }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[-15%] right-[-5%] w-[55vw] h-[55vw] max-w-[700px] max-h-[700px] rounded-full opacity-40"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(196,18,47,0.15) 0%, rgba(255,182,193,0.12) 40%, transparent 70%)",
+          }}
+        />
+        <motion.div
+          animate={{
+            x: [0, -20, 25, 0],
+            y: [0, 20, -15, 0],
+            scale: [1, 0.95, 1.08, 1],
+          }}
+          transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-[-10%] left-[-10%] w-[50vw] h-[50vw] max-w-[650px] max-h-[650px] rounded-full opacity-35"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(255,160,140,0.18) 0%, rgba(255,200,180,0.10) 45%, transparent 70%)",
+          }}
+        />
+        <motion.div
+          animate={{
+            x: [0, 15, -10, 0],
+            y: [0, -10, 20, 0],
+            scale: [1, 1.05, 0.98, 1],
+          }}
+          transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[30%] left-[25%] w-[35vw] h-[35vw] max-w-[450px] max-h-[450px] rounded-full opacity-25"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(196,18,47,0.08) 0%, rgba(255,220,210,0.10) 50%, transparent 70%)",
+          }}
+        />
+        <motion.div
+          animate={{
+            x: [0, -15, 10, 0],
+            y: [0, 15, -20, 0],
+          }}
+          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[10%] left-[50%] w-[25vw] h-[25vw] max-w-[350px] max-h-[350px] rounded-full opacity-20"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(255,200,150,0.20) 0%, transparent 60%)",
+          }}
+        />
 
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Large gradient orb */}
+        {/* Soft dots pattern */}
         <div
-          className="absolute -top-40 -right-40 w-96 h-96 rounded-full opacity-20"
+          className="absolute inset-0 opacity-[0.035]"
           style={{
-            background: 'radial-gradient(circle, rgba(0,188,212,0.4) 0%, transparent 70%)',
-            animation: mounted ? 'float 8s ease-in-out infinite' : 'none',
+            backgroundImage: `radial-gradient(circle, rgba(196,18,47,0.25) 1px, transparent 1px)`,
+            backgroundSize: "40px 40px",
           }}
-        />
-        <div
-          className="absolute -bottom-32 -left-32 w-80 h-80 rounded-full opacity-15"
-          style={{
-            background: 'radial-gradient(circle, rgba(99,102,241,0.4) 0%, transparent 70%)',
-            animation: mounted ? 'float 10s ease-in-out infinite reverse' : 'none',
-          }}
-        />
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-5"
-          style={{
-            background: 'radial-gradient(circle, rgba(0,188,212,0.3) 0%, transparent 60%)',
-          }}
-        />
-
-        {/* Grid pattern */}
-        <div className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-            backgroundSize: '60px 60px',
-          }}
-        />
-
-        {/* Floating dots */}
-        {mounted && (
-          <>
-            <div className="absolute top-[15%] left-[10%] w-1.5 h-1.5 bg-cyan-400 rounded-full opacity-40" style={{ animation: 'pulse-dot 3s ease-in-out infinite' }} />
-            <div className="absolute top-[25%] right-[15%] w-1 h-1 bg-indigo-400 rounded-full opacity-30" style={{ animation: 'pulse-dot 4s ease-in-out infinite 1s' }} />
-            <div className="absolute bottom-[20%] left-[20%] w-1 h-1 bg-cyan-300 rounded-full opacity-30" style={{ animation: 'pulse-dot 3.5s ease-in-out infinite 0.5s' }} />
-            <div className="absolute bottom-[35%] right-[10%] w-1.5 h-1.5 bg-indigo-300 rounded-full opacity-20" style={{ animation: 'pulse-dot 5s ease-in-out infinite 2s' }} />
-            <div className="absolute top-[60%] left-[5%] w-1 h-1 bg-teal-400 rounded-full opacity-25" style={{ animation: 'pulse-dot 4.5s ease-in-out infinite 1.5s' }} />
-          </>
-        )}
+        ></div>
       </div>
 
-      {/* Main Card */}
-      <div
-        className={`relative z-10 w-full max-w-[460px] mx-4 transition-all duration-700 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
-      >
-        {/* Logo */}
-        <div className="text-center mb-8">
-          <Link href="/" className="inline-block bg-white px-5 py-2 rounded-xl shadow-lg border border-white/20">
-            <Logo size="small" />
-          </Link>
-        </div>
-
-        {/* Glass Card */}
-        <div
-          className="backdrop-blur-xl rounded-2xl border overflow-hidden"
-          style={{
-            background: 'linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%)',
-            borderColor: 'rgba(255,255,255,0.08)',
-            boxShadow: '0 25px 60px -10px rgba(0,0,0,0.5), 0 0 40px -15px rgba(0,188,212,0.15)',
+      {/* Floating decorative elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 90, repeat: Infinity, ease: "linear" }}
+          className="absolute top-[18%] right-[15%] w-24 h-24 rounded-full border border-[#C4122F]/[0.06]"
+        />
+        <motion.div
+          animate={{ y: [0, -8, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[25%] right-[28%] w-2 h-2 rounded-full bg-[#C4122F]/15"
+        />
+        <motion.div
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-[35%] left-[10%] w-1.5 h-1.5 rounded-full bg-rose-300/30"
+        />
+        <motion.div
+          animate={{ x: [0, 5, 0] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[60%] left-[6%] w-12 h-px bg-gradient-to-r from-[#C4122F]/15 to-transparent"
+        />
+        <motion.div
+          animate={{ y: [0, -6, 0] }}
+          transition={{
+            duration: 3.5,
+            repeat: Infinity,
+            ease: "easeInOut",
           }}
+          className="absolute bottom-[25%] right-[8%] w-1.5 h-1.5 rounded-full bg-[#C4122F]/10"
+        />
+      </div>
+
+      {/* Header */}
+      <header className="relative z-20 py-4 px-6 md:px-10 border-b border-slate-200/60 bg-white/60 backdrop-blur-md">
+        <motion.div
+          initial={{ opacity: 0, y: -15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="flex items-center justify-between max-w-7xl mx-auto"
         >
-          {/* Card Header */}
-          <div className="px-8 pt-8 pb-2">
-            <h3 className="text-2xl font-bold text-white mb-1.5 tracking-tight">Welcome Back</h3>
-            <p className="text-slate-400 text-sm">
-              Sign in to your IELTS exam portal
-            </p>
-          </div>
+          <Link href="/">
+            <Logo />
+          </Link>
 
-          {/* Form */}
-          <div className="px-8 pb-8 pt-4">
-            {/* Error */}
-            {error && (
-              <div
-                className="mb-5 p-3.5 rounded-xl flex items-center gap-2.5"
-                style={{
-                  background: 'rgba(239,68,68,0.1)',
-                  border: '1px solid rgba(239,68,68,0.2)',
-                }}
-              >
-                <FiAlertCircle className="text-red-400 flex-shrink-0" size={16} />
-                <p className="text-red-300 text-sm">{error}</p>
-              </div>
-            )}
-
-            <form onSubmit={handleLogin} className="space-y-5">
-              {/* Email */}
-              <div>
-                <label className="block text-sm font-medium text-slate-300 mb-2">
-                  Email Address
-                </label>
-                <div className="relative group">
-                  <FiMail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-cyan-400 transition-colors" size={16} />
-                  <input
-                    type="email"
-                    name="email"
-                    id="login-email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    placeholder="you@example.com"
-                    className="w-full pl-11 pr-4 py-3 rounded-xl text-sm text-white placeholder-slate-500 outline-none transition-all duration-200"
-                    style={{
-                      background: 'rgba(255,255,255,0.05)',
-                      border: validationErrors.email
-                        ? '1px solid rgba(239,68,68,0.5)'
-                        : '1px solid rgba(255,255,255,0.08)',
-                    }}
-                    onFocus={(e) => {
-                      if (!validationErrors.email) e.target.style.border = '1px solid rgba(0,188,212,0.5)';
-                      e.target.style.background = 'rgba(255,255,255,0.08)';
-                      e.target.style.boxShadow = '0 0 20px -5px rgba(0,188,212,0.15)';
-                    }}
-                    onBlur={(e) => {
-                      e.target.style.border = validationErrors.email ? '1px solid rgba(239,68,68,0.5)' : '1px solid rgba(255,255,255,0.08)';
-                      e.target.style.background = 'rgba(255,255,255,0.05)';
-                      e.target.style.boxShadow = 'none';
-                    }}
-                  />
-                </div>
-                {validationErrors.email && (
-                  <p className="mt-1.5 text-red-400 text-xs">{validationErrors.email}</p>
-                )}
-              </div>
-
-              {/* Password */}
-              <div>
-                <label className="block text-sm font-medium text-slate-300 mb-2">
-                  Password
-                </label>
-                <div className="relative group">
-                  <FiLock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-cyan-400 transition-colors" size={16} />
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    name="password"
-                    id="login-password"
-                    value={formData.password}
-                    onChange={handleInputChange}
-                    placeholder="Enter your password"
-                    className="w-full pl-11 pr-12 py-3 rounded-xl text-sm text-white placeholder-slate-500 outline-none transition-all duration-200"
-                    style={{
-                      background: 'rgba(255,255,255,0.05)',
-                      border: validationErrors.password
-                        ? '1px solid rgba(239,68,68,0.5)'
-                        : '1px solid rgba(255,255,255,0.08)',
-                    }}
-                    onFocus={(e) => {
-                      if (!validationErrors.password) e.target.style.border = '1px solid rgba(0,188,212,0.5)';
-                      e.target.style.background = 'rgba(255,255,255,0.08)';
-                      e.target.style.boxShadow = '0 0 20px -5px rgba(0,188,212,0.15)';
-                    }}
-                    onBlur={(e) => {
-                      e.target.style.border = validationErrors.password ? '1px solid rgba(239,68,68,0.5)' : '1px solid rgba(255,255,255,0.08)';
-                      e.target.style.background = 'rgba(255,255,255,0.05)';
-                      e.target.style.boxShadow = 'none';
-                    }}
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300 transition-colors p-1"
-                  >
-                    {showPassword ? (
-                      <MdOutlineVisibilityOff size={18} />
-                    ) : (
-                      <MdOutlineRemoveRedEye size={18} />
-                    )}
-                  </button>
-                </div>
-                {validationErrors.password && (
-                  <p className="mt-1.5 text-red-400 text-xs">{validationErrors.password}</p>
-                )}
-              </div>
-
-              {/* Remember Me & Forgot */}
-              <div className="flex items-center justify-between">
-                <label className="flex items-center gap-2.5 cursor-pointer group">
-                  <div className="relative">
-                    <input
-                      type="checkbox"
-                      checked={rememberMe}
-                      onChange={(e) => setRememberMe(e.target.checked)}
-                      className="sr-only peer"
-                    />
-                    <div className="w-[18px] h-[18px] rounded-[5px] border transition-all peer-checked:bg-cyan-500 peer-checked:border-cyan-500"
-                      style={{ borderColor: 'rgba(255,255,255,0.15)', background: 'rgba(255,255,255,0.05)' }}
-                    >
-                      {rememberMe && (
-                        <svg className="w-full h-full text-white p-0.5" viewBox="0 0 20 20" fill="currentColor">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
-                      )}
-                    </div>
-                  </div>
-                  <span className="text-sm text-slate-400 group-hover:text-slate-300 transition-colors">Remember me</span>
-                </label>
-                <Link href="/forgot-password" className="text-sm text-cyan-400 hover:text-cyan-300 transition-colors">
-                  Forgot password?
-                </Link>
-              </div>
-
-              {/* Submit Button */}
-              <button
-                type="submit"
-                id="login-submit"
-                disabled={loading}
-                className="w-full relative py-3 rounded-xl font-semibold text-sm text-white overflow-hidden transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed group"
-                style={{
-                  background: loading
-                    ? 'rgba(0,188,212,0.3)'
-                    : 'linear-gradient(135deg, #00bcd4 0%, #0097a7 50%, #00838f 100%)',
-                  boxShadow: loading ? 'none' : '0 4px 20px -5px rgba(0,188,212,0.4)',
-                }}
-              >
-                {/* Hover shimmer effect */}
-                <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{
-                    background: 'linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%)',
-                  }}
-                />
-                <span className="relative z-10 flex items-center justify-center gap-2">
-                  {loading ? (
-                    <>
-                      <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                      </svg>
-                      Signing in...
-                    </>
-                  ) : (
-                    <>
-                      Sign In
-                      <svg className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                      </svg>
-                    </>
-                  )}
-                </span>
-              </button>
-            </form>
-
-            {/* Info Box */}
-            <div
-              className="mt-6 p-3.5 rounded-xl flex items-start gap-3"
-              style={{
-                background: 'rgba(0,188,212,0.06)',
-                border: '1px solid rgba(0,188,212,0.1)',
-              }}
-            >
-              <div className="w-5 h-5 rounded-full bg-cyan-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <span className="text-cyan-400 text-[10px]">ℹ</span>
-              </div>
-              <p className="text-xs text-slate-400 leading-relaxed">
-                <span className="font-semibold text-slate-300">Students:</span> Use your registered email and phone number as password.
-              </p>
+          <div className="flex items-center gap-3">
+            <div className="hidden md:flex items-center gap-1.5 text-slate-400 text-sm px-3">
+              <LuShieldCheck className="text-emerald-500 text-base" />
+              <span className="text-slate-500 font-medium">Secure</span>
             </div>
 
-            {/* Back Link */}
-            <div className="mt-5 text-center">
+            <Link
+              href="/"
+              className="px-5 py-2 bg-white/70 backdrop-blur-sm text-slate-700 rounded-lg font-medium text-sm hover:bg-white transition-all cursor-pointer flex items-center gap-2 border border-slate-200/60 shadow-sm"
+            >
+              <FiArrowLeft className="text-xs" />
+              <span className="hidden sm:inline">Back to Home</span>
+            </Link>
+          </div>
+        </motion.div>
+      </header>
+
+      {/* Main Content */}
+      <div className="relative z-10 flex-1 flex items-center justify-center px-6 md:px-10 py-10">
+        <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          {/* Left Content — Branding & Features */}
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15, duration: 0.7 }}
+            className="lg:col-span-7 hidden lg:block"
+          >
+            {/* Badge */}
+            <motion.div
+              initial={{ opacity: 0, x: -15 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+              className="inline-flex items-center gap-2 bg-[#C4122F]/[0.06] border border-[#C4122F]/10 rounded-full px-4 py-1.5 mb-6"
+            >
+              <span className="w-1.5 h-1.5 bg-[#C4122F] rounded-full animate-pulse"></span>
+              <span className="text-[#C4122F]/70 text-[11px] font-semibold uppercase tracking-widest">
+                Secure Portal Access
+              </span>
+            </motion.div>
+
+            {/* Main Heading */}
+            <h1 className="text-3xl md:text-[2.6rem] lg:text-[3rem] font-extrabold leading-[1.12] tracking-tight mb-4">
+              <span
+                className="text-transparent bg-clip-text"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(135deg, #C4122F, #E8354F)",
+                }}
+              >
+                Welcome to Your
+              </span>
+              <br />
+              <span className="text-slate-900">IELTS Exam Portal</span>
+            </h1>
+
+            <p className="text-slate-500 text-base md:text-lg leading-relaxed mb-8 max-w-lg">
+              Sign in to access your{" "}
+              <strong className="text-[#C4122F]">
+                mock tests, results, and progress tracking
+              </strong>{" "}
+              — everything you need to ace your IELTS exam.
+            </p>
+
+            {/* Feature highlights */}
+            <div className="space-y-4 mb-8">
+              {[
+                {
+                  icon: <FaHeadphones className="text-sm" />,
+                  title: "Full Mock Tests",
+                  desc: "Listening, Reading & Writing modules",
+                  gradient: "from-violet-500 to-purple-600",
+                },
+                {
+                  icon: <FaShieldAlt className="text-sm" />,
+                  title: "Secure Environment",
+                  desc: "Proctored exam experience",
+                  gradient: "from-amber-500 to-orange-500",
+                },
+                {
+                  icon: <FaUserGraduate className="text-sm" />,
+                  title: "Track Progress",
+                  desc: "View scores and detailed analytics",
+                  gradient: "from-emerald-500 to-teal-600",
+                },
+              ].map((feature, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.5 + i * 0.12 }}
+                  className="flex items-center gap-4"
+                >
+                  <div
+                    className={`w-10 h-10 rounded-xl bg-gradient-to-br ${feature.gradient} flex items-center justify-center text-white shadow-md`}
+                  >
+                    {feature.icon}
+                  </div>
+                  <div>
+                    <p className="text-slate-900 font-semibold text-sm">
+                      {feature.title}
+                    </p>
+                    <p className="text-slate-400 text-xs">{feature.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Stats */}
+            <div className="flex items-center gap-8 md:gap-10">
+              {[
+                { value: "5,000+", label: "Students Tested" },
+                { value: "Band 7+", label: "Avg. Score" },
+                { value: "24/7", label: "Available" },
+              ].map((stat, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.8 + i * 0.1 }}
+                >
+                  <p className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">
+                    {stat.value}
+                  </p>
+                  <p className="text-slate-400 text-xs font-medium mt-1 uppercase tracking-wider">
+                    {stat.label}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Right — Login Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.25, duration: 0.7 }}
+            className="lg:col-span-5 w-full max-w-[440px] mx-auto lg:mx-0 lg:ml-auto"
+          >
+            <div className="relative">
+              {/* Glow behind card */}
+              <div className="absolute -inset-3 bg-[#C4122F]/[0.04] rounded-[2rem] blur-xl"></div>
+
+              <div className="relative bg-white border border-slate-200/80 rounded-2xl p-7 shadow-xl shadow-slate-200/50">
+                {/* Card Header */}
+                <div className="text-center mb-6">
+                  <div className="w-12 h-12 mx-auto mb-3 bg-gradient-to-br from-[#C4122F] to-[#E8354F] rounded-xl flex items-center justify-center shadow-lg shadow-[#C4122F]/20">
+                    <FaUserGraduate className="text-white text-xl" />
+                  </div>
+                  <h3 className="text-lg font-bold text-slate-900">
+                    Welcome Back
+                  </h3>
+                  <p className="text-slate-400 text-sm mt-1">
+                    Sign in to your IELTS exam portal
+                  </p>
+                </div>
+
+                {/* Error */}
+                <AnimatePresence>
+                  {error && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10, height: 0 }}
+                      animate={{ opacity: 1, y: 0, height: "auto" }}
+                      exit={{ opacity: 0, y: -10, height: 0 }}
+                      className="mb-5 p-3.5 rounded-xl flex items-center gap-2.5 bg-red-50 border border-red-100"
+                    >
+                      <FiAlertCircle className="text-red-500 flex-shrink-0" size={16} />
+                      <p className="text-red-600 text-sm">{error}</p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                {/* Form */}
+                <form onSubmit={handleLogin} className="space-y-4">
+                  {/* Email */}
+                  <div>
+                    <label className="block text-slate-600 text-xs mb-1.5 font-semibold uppercase tracking-wider">
+                      Email Address
+                    </label>
+                    <div className="relative">
+                      <FiMail className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-300 text-sm" />
+                      <input
+                        type="email"
+                        name="email"
+                        id="login-email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        placeholder="you@example.com"
+                        className={`w-full bg-slate-50 border rounded-lg pl-10 pr-4 py-3 text-slate-900 placeholder-slate-300 focus:border-[#C4122F]/50 focus:bg-white focus:ring-2 focus:ring-[#C4122F]/10 outline-none transition-all text-sm ${validationErrors.email
+                          ? "border-red-300"
+                          : "border-slate-200"
+                          }`}
+                        autoComplete="email"
+                      />
+                    </div>
+                    {validationErrors.email && (
+                      <p className="mt-1.5 text-red-500 text-xs">
+                        {validationErrors.email}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Password */}
+                  <div>
+                    <label className="block text-slate-600 text-xs mb-1.5 font-semibold uppercase tracking-wider">
+                      Password
+                    </label>
+                    <div className="relative">
+                      <FiLock className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-300 text-sm" />
+                      <input
+                        type={showPassword ? "text" : "password"}
+                        name="password"
+                        id="login-password"
+                        value={formData.password}
+                        onChange={handleInputChange}
+                        placeholder="Enter your password"
+                        className={`w-full bg-slate-50 border rounded-lg pl-10 pr-12 py-3 text-slate-900 placeholder-slate-300 focus:border-[#C4122F]/50 focus:bg-white focus:ring-2 focus:ring-[#C4122F]/10 outline-none transition-all text-sm ${validationErrors.password
+                          ? "border-red-300"
+                          : "border-slate-200"
+                          }`}
+                        autoComplete="current-password"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors p-1 cursor-pointer"
+                      >
+                        {showPassword ? (
+                          <FiEyeOff size={16} />
+                        ) : (
+                          <FiEye size={16} />
+                        )}
+                      </button>
+                    </div>
+                    {validationErrors.password && (
+                      <p className="mt-1.5 text-red-500 text-xs">
+                        {validationErrors.password}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Remember Me & Forgot */}
+                  <div className="flex items-center justify-between">
+                    <label className="flex items-start gap-2.5 cursor-pointer group">
+                      <div className="relative mt-0.5">
+                        <input
+                          type="checkbox"
+                          checked={rememberMe}
+                          onChange={(e) => setRememberMe(e.target.checked)}
+                          className="w-4 h-4 rounded border border-slate-300 bg-white checked:bg-[#C4122F] checked:border-[#C4122F] appearance-none cursor-pointer transition-all"
+                        />
+                        {rememberMe && (
+                          <FaCheckCircle className="absolute inset-0 text-white w-4 h-4 pointer-events-none" />
+                        )}
+                      </div>
+                      <span className="text-slate-400 text-xs font-medium group-hover:text-slate-600 transition-colors">
+                        Remember me
+                      </span>
+                    </label>
+                    <Link
+                      href="/forgot-password"
+                      className="text-xs text-[#C4122F] hover:text-[#a50f27] transition-colors font-medium"
+                    >
+                      Forgot password?
+                    </Link>
+                  </div>
+
+                  {/* Submit Button */}
+                  <button
+                    type="submit"
+                    id="login-submit"
+                    disabled={loading}
+                    className="w-full flex items-center justify-center gap-2.5 bg-gradient-to-r from-[#C4122F] to-[#E8354F] text-white py-3 rounded-lg font-bold text-sm hover:shadow-xl hover:shadow-[#C4122F]/30 transition-all cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed transform hover:-translate-y-0.5 active:translate-y-0"
+                  >
+                    {loading ? (
+                      <>
+                        <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                        Signing in...
+                      </>
+                    ) : (
+                      <>
+                        <span>Sign In</span>
+                        <FiArrowRight className="text-xs" />
+                      </>
+                    )}
+                  </button>
+                </form>
+
+                {/* Info Box */}
+                <div className="mt-5 p-3.5 rounded-xl flex items-start gap-3 bg-[#C4122F]/[0.04] border border-[#C4122F]/10">
+                  <div className="w-5 h-5 rounded-full bg-[#C4122F]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-[#C4122F] text-[10px] font-bold">
+                      i
+                    </span>
+                  </div>
+                  <p className="text-xs text-slate-500 leading-relaxed">
+                    <span className="font-semibold text-slate-700">
+                      Students:
+                    </span>{" "}
+                    Use your registered email and phone number as password.
+                  </p>
+                </div>
+
+                {/* Security */}
+                <div className="mt-5 pt-4 border-t border-slate-100">
+                  <div className="flex items-center gap-2 text-slate-400 text-[11px]">
+                    <FaShieldAlt className="text-amber-500 flex-shrink-0" />
+                    <p>
+                      Secure login · 256-bit SSL encrypted connection
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Back to Home — Mobile */}
+            <div className="mt-5 text-center lg:hidden">
               <Link
                 href="/"
-                className="text-sm text-slate-500 hover:text-slate-300 transition-colors inline-flex items-center gap-1.5"
+                className="text-sm text-slate-500 hover:text-[#C4122F] transition-colors inline-flex items-center gap-1.5"
               >
-                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                </svg>
+                <FiArrowLeft className="text-xs" />
                 Back to Home
               </Link>
             </div>
-          </div>
-        </div>
-
-        {/* Footer */}
-        <div className="mt-6 text-center">
-          <p className="text-slate-600 text-xs">
-            © {new Date().getFullYear()} Best IELTS BD. All rights reserved.
-          </p>
+          </motion.div>
         </div>
       </div>
 
-      {/* CSS Animations */}
-      <style jsx global>{`
-        @keyframes float {
-          0%, 100% { transform: translate(0, 0); }
-          33% { transform: translate(15px, -20px); }
-          66% { transform: translate(-10px, 15px); }
-        }
-        @keyframes pulse-dot {
-          0%, 100% { opacity: 0.2; transform: scale(1); }
-          50% { opacity: 0.6; transform: scale(1.5); }
-        }
-      `}</style>
+      {/* Footer */}
+      <footer className="relative z-10 py-6 px-6 md:px-10 border-t border-slate-200/60 bg-white/40 backdrop-blur-sm">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3 text-slate-400 text-xs font-medium">
+          <div className="flex items-center gap-2">
+            <Logo size="small" />
+            <span className="text-slate-200 mx-1">|</span>
+            <p>
+              © {new Date().getFullYear()} Best IELTS BD. All rights reserved.
+            </p>
+          </div>
+          <div className="flex items-center gap-5">
+            <span className="hover:text-[#C4122F] cursor-pointer transition-colors">
+              Privacy
+            </span>
+            <span className="hover:text-[#C4122F] cursor-pointer transition-colors">
+              Terms
+            </span>
+            <span className="hover:text-[#C4122F] cursor-pointer transition-colors">
+              Support
+            </span>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };

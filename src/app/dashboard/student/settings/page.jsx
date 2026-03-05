@@ -54,7 +54,7 @@ export default function StudentSettings() {
         try {
             const token = localStorage.getItem("token");
             const response = await fetch(
-                `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api"}/auth/change-password`,
+                `${process.env.NEXT_PUBLIC_API_URL || "https://bac-itets-exam-server-eqtt.vercel.app/api"}/auth/change-password`,
                 {
                     method: "POST",
                     headers: {
@@ -115,8 +115,8 @@ export default function StudentSettings() {
                 {/* Message */}
                 {message.text && (
                     <div className={`mb-4 p-3 rounded-md flex items-center gap-2 ${message.type === "success"
-                            ? "bg-green-50 border border-green-200"
-                            : "bg-red-50 border border-red-200"
+                        ? "bg-green-50 border border-green-200"
+                        : "bg-red-50 border border-red-200"
                         }`}>
                         {message.type === "success" ? (
                             <FaCheckCircle className="text-green-600" size={14} />
@@ -144,8 +144,8 @@ export default function StudentSettings() {
                                 onChange={handleInputChange(setCurrentPassword, "currentPassword")}
                                 placeholder="Enter current password"
                                 className={`w-full pl-10 pr-10 py-2.5 border rounded-md text-sm bg-gray-50 focus:bg-white outline-none transition-colors ${errors.currentPassword
-                                        ? "border-red-300 focus:border-red-400"
-                                        : "border-gray-200 focus:border-cyan-500"
+                                    ? "border-red-300 focus:border-red-400"
+                                    : "border-gray-200 focus:border-cyan-500"
                                     }`}
                             />
                             <button
@@ -174,8 +174,8 @@ export default function StudentSettings() {
                                 onChange={handleInputChange(setNewPassword, "newPassword")}
                                 placeholder="Enter new password"
                                 className={`w-full pl-10 pr-10 py-2.5 border rounded-md text-sm bg-gray-50 focus:bg-white outline-none transition-colors ${errors.newPassword
-                                        ? "border-red-300 focus:border-red-400"
-                                        : "border-gray-200 focus:border-cyan-500"
+                                    ? "border-red-300 focus:border-red-400"
+                                    : "border-gray-200 focus:border-cyan-500"
                                     }`}
                             />
                             <button
@@ -204,8 +204,8 @@ export default function StudentSettings() {
                                 onChange={handleInputChange(setConfirmPassword, "confirmPassword")}
                                 placeholder="Confirm new password"
                                 className={`w-full pl-10 pr-10 py-2.5 border rounded-md text-sm bg-gray-50 focus:bg-white outline-none transition-colors ${errors.confirmPassword
-                                        ? "border-red-300 focus:border-red-400"
-                                        : "border-gray-200 focus:border-cyan-500"
+                                    ? "border-red-300 focus:border-red-400"
+                                    : "border-gray-200 focus:border-cyan-500"
                                     }`}
                             />
                             <button

@@ -342,15 +342,37 @@ export default function HomePage() {
                                 <span className="text-slate-900">Practice Platform</span>
                             </h1>
 
-                            <p className="text-[#C4122F] font-semibold text-sm md:text-base mb-3">
-                                100% Authentic IELTS Exam Experience
-                            </p>
 
                             <p className="text-slate-500 text-base md:text-lg leading-relaxed mb-8 max-w-lg">
                                 Prepare for your IELTS exam with our{" "}
                                 <strong className="text-[#C4122F]">Official-Style Computer-Based Mock Tests</strong>{" "}
                                 — real exam format, instant results, anytime, anywhere!
                             </p>
+
+                            {/* Feature highlights — row */}
+                            <div className="flex items-center gap-6 mb-8">
+                                {[
+                                    { icon: <FaHeadphones className="text-sm" />, title: "Full Mock Tests", desc: "Listening, Reading & Writing", gradient: "from-violet-500 to-purple-600" },
+                                    { icon: <FaShieldAlt className="text-sm" />, title: "Secure Environment", desc: "Proctored exam experience", gradient: "from-amber-500 to-orange-500" },
+                                    { icon: <FaUserGraduate className="text-sm" />, title: "Track Progress", desc: "Scores & detailed analytics", gradient: "from-emerald-500 to-teal-600" },
+                                ].map((feature, i) => (
+                                    <motion.div
+                                        key={i}
+                                        initial={{ opacity: 0, y: 15 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ delay: 0.45 + i * 0.1 }}
+                                        className="flex items-center gap-3"
+                                    >
+                                        <div className={`w-9 h-9 rounded-lg bg-gradient-to-br ${feature.gradient} flex items-center justify-center text-white shadow-md flex-shrink-0`}>
+                                            {feature.icon}
+                                        </div>
+                                        <div>
+                                            <p className="text-slate-900 font-semibold text-sm leading-tight">{feature.title}</p>
+                                            <p className="text-slate-400 text-[11px]">{feature.desc}</p>
+                                        </div>
+                                    </motion.div>
+                                ))}
+                            </div>
 
                             {/* Stats */}
                             <div className="flex items-center gap-8 md:gap-10">
