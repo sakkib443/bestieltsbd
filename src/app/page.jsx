@@ -326,25 +326,30 @@ export default function HomePage() {
                                 className="inline-flex items-center gap-2 bg-[#C4122F]/[0.06] border border-[#C4122F]/10 rounded-full px-4 py-1.5 mb-6"
                             >
                                 <span className="w-1.5 h-1.5 bg-[#C4122F] rounded-full animate-pulse"></span>
-                                <span className="text-[#C4122F]/70 text-[11px] font-semibold uppercase tracking-widest">🇧🇩 Bangladesh's #1 IELTS Mock Test Platform</span>
+                                <span className="text-[#C4122F]/70 text-[11px] font-semibold uppercase tracking-widest">100% Real Exam Familiarization</span>
                             </motion.div>
 
                             {/* Main Heading — Smaller */}
-                            <h1 className="text-3xl md:text-[2.5rem] lg:text-[2.85rem] font-extrabold text-slate-900 leading-[1.15] tracking-tight mb-5">
-                                Your Dream of Studying
+                            <h1 className="text-3xl md:text-[2.6rem] lg:text-[3rem] font-extrabold leading-[1.12] tracking-tight mb-4">
+                                <span className="text-transparent bg-clip-text" style={{
+                                    backgroundImage: 'linear-gradient(135deg, #C4122F, #E8354F)'
+                                }}>Computer Delivered &amp; UKVI</span>
                                 <br />
                                 <span className="text-transparent bg-clip-text" style={{
-                                    backgroundImage: 'linear-gradient(135deg, #C4122F, #E8354F, #C4122F)'
-                                }}>
-                                    Abroad Starts
-                                </span>
-                                {" "}With IELTS
+                                    backgroundImage: 'linear-gradient(135deg, #C4122F, #E8354F)'
+                                }}>IELTS Mock Tests</span>
+                                <br />
+                                <span className="text-slate-900">Practice Online</span>
                             </h1>
 
+                            <p className="text-[#C4122F] font-semibold text-sm md:text-base mb-3">
+                                100% Real Exam Familiarization
+                            </p>
+
                             <p className="text-slate-500 text-base md:text-lg leading-relaxed mb-8 max-w-lg">
-                                Planning to move to the UK, Canada or Australia?
-                                Practice with our <strong className="text-slate-700">Computer-Based IELTS Mock Test</strong> —
-                                real exam environment, instant scores, expert feedback.
+                                Take the Official-Style{" "}
+                                <strong className="text-[#C4122F]">Computer Delivered &amp; UKVI IELTS</strong>{" "}
+                                Mock Tests Practice online like the real exam — anytime, anywhere!
                             </p>
 
                             {/* Stats */}
