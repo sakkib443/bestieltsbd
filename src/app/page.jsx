@@ -22,7 +22,11 @@ import {
     FaUserGraduate,
     FaAward,
     FaGlobe,
-    FaChevronDown
+    FaChevronDown,
+    FaQuoteLeft,
+    FaStar,
+    FaChevronUp,
+    FaQuestionCircle
 } from "react-icons/fa";
 import { LuShieldCheck } from "react-icons/lu";
 import { HiOutlineDocumentText } from "react-icons/hi";
@@ -82,6 +86,7 @@ export default function HomePage() {
     const [isLoading, setIsLoading] = useState(false);
     const [agreed, setAgreed] = useState(false);
     const [showDemoVideo, setShowDemoVideo] = useState(false);
+    const [openFaq, setOpenFaq] = useState(null);
 
     const parseErrorMessage = (error) => {
         if (typeof error === "string") {
@@ -619,6 +624,165 @@ export default function HomePage() {
                 </div>
             </section>
 
+            {/* ===== TESTIMONIALS ===== */}
+            <section className="py-20 px-6 md:px-10 bg-[#FAFBFC]">
+                <div className="max-w-6xl mx-auto">
+                    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
+                        <span className="inline-block px-4 py-1.5 bg-[#C4122F]/8 text-[#C4122F] rounded-full text-xs font-bold uppercase tracking-wider mb-4 border border-[#C4122F]/10">
+                            Student Reviews
+                        </span>
+                        <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3 tracking-tight">
+                            What Our Students Say
+                        </h2>
+                        <p className="text-slate-500 text-base max-w-lg mx-auto">
+                            Hear from students who achieved their target band scores with our platform
+                        </p>
+                    </motion.div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                        {[
+                            {
+                                name: "Rahima Akter",
+                                score: "Band 7.5",
+                                quote: "The mock tests felt exactly like the real IELTS exam. The listening section with real audio recordings helped me score Band 8 in listening!",
+                                rating: 5,
+                                module: "Listening",
+                            },
+                            {
+                                name: "Tanvir Hasan",
+                                score: "Band 7.0",
+                                quote: "I practiced reading passages here for 2 weeks. The timer and real exam interface made me fully prepared. Highly recommend for IELTS preparation!",
+                                rating: 5,
+                                module: "Reading",
+                            },
+                            {
+                                name: "Fatema Noor",
+                                score: "Band 8.0",
+                                quote: "Best IELTS mock test platform in Bangladesh! The writing feedback from examiners was incredibly detailed and helped me improve quickly.",
+                                rating: 5,
+                                module: "Writing",
+                            },
+                        ].map((testimonial, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: 25 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: index * 0.12 }}
+                                className="bg-white border border-slate-100 rounded-2xl p-6 hover:shadow-lg hover:shadow-slate-100 transition-all duration-300 hover:border-slate-200 relative"
+                            >
+                                {/* Quote icon */}
+                                <FaQuoteLeft className="text-[#C4122F]/10 text-3xl absolute top-5 right-5" />
+
+                                {/* Stars */}
+                                <div className="flex items-center gap-0.5 mb-4">
+                                    {Array.from({ length: testimonial.rating }).map((_, i) => (
+                                        <FaStar key={i} className="text-amber-400 text-sm" />
+                                    ))}
+                                </div>
+
+                                {/* Quote */}
+                                <p className="text-slate-600 text-sm leading-relaxed mb-5">
+                                    "{testimonial.quote}"
+                                </p>
+
+                                {/* Author */}
+                                <div className="flex items-center justify-between pt-4 border-t border-slate-100">
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-10 h-10 bg-gradient-to-br from-[#C4122F] to-[#E8354F] rounded-full flex items-center justify-center text-white font-bold text-sm">
+                                            {testimonial.name.charAt(0)}
+                                        </div>
+                                        <div>
+                                            <p className="text-slate-900 font-semibold text-sm">{testimonial.name}</p>
+                                            <p className="text-slate-400 text-xs">{testimonial.module} Student</p>
+                                        </div>
+                                    </div>
+                                    <div className="bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded-lg text-xs font-bold border border-emerald-100">
+                                        {testimonial.score}
+                                    </div>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* ===== FAQ ===== */}
+            <section className="py-20 px-6 md:px-10 bg-white">
+                <div className="max-w-3xl mx-auto">
+                    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
+                        <span className="inline-block px-4 py-1.5 bg-[#C4122F]/8 text-[#C4122F] rounded-full text-xs font-bold uppercase tracking-wider mb-4 border border-[#C4122F]/10">
+                            FAQ
+                        </span>
+                        <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3 tracking-tight">
+                            Frequently Asked Questions
+                        </h2>
+                        <p className="text-slate-500 text-base max-w-lg mx-auto">
+                            Everything you need to know about our IELTS mock test platform
+                        </p>
+                    </motion.div>
+
+                    <div className="space-y-3">
+                        {[
+                            {
+                                q: "How does the mock test work?",
+                                a: "Our mock tests replicate the real IELTS computer-based exam exactly. You'll get Listening (30 min), Reading (60 min), and Writing (60 min) sections with the same question types and timing as the actual exam.",
+                            },
+                            {
+                                q: "How do I get an Exam ID?",
+                                a: "You can get an Exam ID by contacting our team or registering on our platform. Once payment is confirmed, you'll receive a unique Exam ID (e.g., BACIELTS240001) to start your mock test.",
+                            },
+                            {
+                                q: "When will I get my results?",
+                                a: "Listening and Reading scores are available immediately after completing each module. Writing scores are evaluated by certified examiners and will be available within 24-48 hours.",
+                            },
+                            {
+                                q: "Can I take the test on my phone?",
+                                a: "We recommend using a desktop or laptop computer for the best experience, as the real IELTS exam is computer-based. You'll also need headphones for the Listening section.",
+                            },
+                            {
+                                q: "Is the demo exam free?",
+                                a: "Yes! The demo exam is completely free and gives you a preview of our platform. However, premium features like detailed results, examiner marking for writing, and score certificates are only available with a real Exam ID.",
+                            },
+                        ].map((faq, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: 15 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: index * 0.08 }}
+                                className="border border-slate-200 rounded-xl overflow-hidden hover:border-slate-300 transition-colors"
+                            >
+                                <button
+                                    onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                                    className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer group"
+                                >
+                                    <div className="flex items-center gap-3">
+                                        <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm flex-shrink-0 transition-colors ${openFaq === index
+                                            ? "bg-[#C4122F] text-white"
+                                            : "bg-slate-100 text-slate-500 group-hover:bg-[#C4122F]/10 group-hover:text-[#C4122F]"
+                                            }`}>
+                                            <FaQuestionCircle />
+                                        </div>
+                                        <span className="text-slate-800 font-semibold text-sm">{faq.q}</span>
+                                    </div>
+                                    <div className={`text-slate-400 transition-transform duration-200 ${openFaq === index ? "rotate-180" : ""}`}>
+                                        <FaChevronDown className="text-xs" />
+                                    </div>
+                                </button>
+                                {openFaq === index && (
+                                    <div className="px-5 pb-4 pt-0">
+                                        <div className="pl-11">
+                                            <p className="text-slate-500 text-sm leading-relaxed">{faq.a}</p>
+                                        </div>
+                                    </div>
+                                )}
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
             {/* ===== FOOTER ===== */}
             <footer className="py-6 px-6 md:px-10 bg-[#FAFBFC] border-t border-slate-100">
                 <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3 text-slate-400 text-xs font-medium">
@@ -631,6 +795,8 @@ export default function HomePage() {
                         <span className="hover:text-[#C4122F] cursor-pointer transition-colors">Privacy</span>
                         <span className="hover:text-[#C4122F] cursor-pointer transition-colors">Terms</span>
                         <span className="hover:text-[#C4122F] cursor-pointer transition-colors">Support</span>
+                        <span className="text-slate-300">|</span>
+                        <span className="text-slate-400">Developed by <a href="https://extrainweb.com" target="_blank" rel="noopener noreferrer" className="text-[#C4122F] hover:text-[#a50f27] transition-colors font-semibold">ExtraInWeb.com</a></span>
                     </div>
                 </div>
             </footer>

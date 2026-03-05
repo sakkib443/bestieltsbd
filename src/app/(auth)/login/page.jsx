@@ -616,6 +616,8 @@ const Login = () => {
             <span className="hover:text-[#C4122F] cursor-pointer transition-colors">
               Support
             </span>
+            <span className="text-slate-300">|</span>
+            <span className="text-slate-400">Developed by <a href="https://extrainweb.com" target="_blank" rel="noopener noreferrer" className="text-[#C4122F] hover:text-[#a50f27] transition-colors font-semibold">ExtraInWeb.com</a></span>
           </div>
         </div>
       </footer>

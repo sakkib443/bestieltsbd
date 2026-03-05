@@ -360,6 +360,8 @@ function ExamEntryContent() {
                 {/* Footer */}
                 <p className="text-center text-gray-400 text-sm mt-6">
                     © {new Date().getFullYear()} Best IELTS BD. All rights reserved.
+                    <span className="mx-1">•</span>
+                    Developed by <a href="https://extrainweb.com" target="_blank" rel="noopener noreferrer" className="text-cyan-600 hover:text-cyan-700 transition-colors font-semibold">ExtraInWeb.com</a>
                 </p>
             </div>
         </div>

@@ -17,6 +17,12 @@ import {
     FaLock,
     FaVideo,
     FaTimes,
+    FaShieldAlt,
+    FaChartBar,
+    FaStar,
+    FaUserGraduate,
+    FaCertificate,
+    FaFileAlt,
 } from "react-icons/fa";
 import { studentsAPI } from "@/lib/api";
 import Logo from "@/components/Logo";
@@ -32,6 +38,7 @@ export default function ExamSelectionPage() {
     const [completedModules, setCompletedModules] = useState([]);
     const [moduleScores, setModuleScores] = useState(null);
     const [showDemoVideo, setShowDemoVideo] = useState(false);
+    const [showDemoPopup, setShowDemoPopup] = useState(false);
     useEffect(() => {
         const loadSessionAndVerify = async () => {
             const storedSession = localStorage.getItem("examSession");
@@ -57,6 +64,7 @@ export default function ExamSelectionPage() {
                         setModuleScores(parsed.scores);
                     }
                     setIsLoading(false);
+                    setShowDemoPopup(true);
                     return;
                 }
 
@@ -285,6 +293,77 @@ export default function ExamSelectionPage() {
                                 >
                                     Start Full Exam <FaArrowRight className="text-[10px]" />
                                 </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Demo Exam Features Popup */}
+            {showDemoPopup && session?.isDemo && (
+                <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4" onClick={() => setShowDemoPopup(false)}>
+                    <div
+                        className="bg-white rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden animate-[slideUp_0.3s_ease-out]"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        {/* Header */}
+                        <div className="bg-gradient-to-r from-[#C4122F] to-[#E8354F] px-6 py-5 text-white relative overflow-hidden">
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+                            <div className="absolute bottom-0 left-0 w-20 h-20 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+                            <div className="relative z-10">
+                                <div className="flex items-center gap-2 mb-2">
+                                    <span className="text-xl">⚡</span>
+                                    <h3 className="text-lg font-bold">Demo Mode Active</h3>
+                                </div>
+                                <p className="text-white/80 text-sm">You're using a free demo. The following premium features are only available with a real Exam ID:</p>
+                            </div>
+                        </div>
+
+                        {/* Features Grid */}
+                        <div className="px-6 py-5">
+                            <div className="grid grid-cols-2 gap-3">
+                                {[
+                                    { icon: <FaShieldAlt />, title: "Security Monitoring", desc: "Tab switch & copy protection", color: "text-amber-500", bg: "bg-amber-50" },
+                                    { icon: <FaChartBar />, title: "Official Results", desc: "Detailed band score report", color: "text-blue-500", bg: "bg-blue-50" },
+                                    { icon: <FaStar />, title: "Band Score Analysis", desc: "Module-wise band breakdown", color: "text-purple-500", bg: "bg-purple-50" },
+                                    { icon: <FaUserGraduate />, title: "Examiner Marking", desc: "Writing checked by examiner", color: "text-emerald-500", bg: "bg-emerald-50" },
+                                    { icon: <FaFileAlt />, title: "Progress Tracking", desc: "Track your improvement", color: "text-cyan-500", bg: "bg-cyan-50" },
+                                    { icon: <FaCertificate />, title: "Score Certificate", desc: "Downloadable result sheet", color: "text-red-500", bg: "bg-red-50" },
+                                ].map((feature, i) => (
+                                    <div key={i} className="flex items-start gap-3 p-3 rounded-xl border border-gray-100 hover:border-gray-200 transition-colors">
+                                        <div className={`w-8 h-8 ${feature.bg} ${feature.color} rounded-lg flex items-center justify-center text-sm flex-shrink-0`}>
+                                            {feature.icon}
+                                        </div>
+                                        <div>
+                                            <p className="text-gray-800 font-semibold text-xs leading-tight">{feature.title}</p>
+                                            <p className="text-gray-400 text-[11px] leading-tight mt-0.5">{feature.desc}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+
+                            {/* CTA */}
+                            <div className="mt-5 bg-gray-50 border border-gray-200 rounded-xl p-4 text-center">
+                                <p className="text-gray-600 text-sm mb-3">
+                                    Get your <strong className="text-[#C4122F]">Exam ID</strong> to unlock all features!
+                                </p>
+                                <div className="flex items-center justify-center gap-2">
+                                    <button
+                                        onClick={() => setShowDemoPopup(false)}
+                                        className="px-5 py-2 bg-white text-gray-700 border border-gray-300 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors cursor-pointer"
+                                    >
+                                        Continue Demo
+                                    </button>
+                                    <button
+                                        onClick={() => {
+                                            setShowDemoPopup(false);
+                                            router.push("/");
+                                        }}
+                                        className="px-5 py-2 bg-gradient-to-r from-[#C4122F] to-[#E8354F] text-white rounded-lg text-sm font-bold hover:shadow-lg hover:shadow-[#C4122F]/25 transition-all cursor-pointer flex items-center gap-2"
+                                    >
+                                        Get Exam ID <FaArrowRight className="text-xs" />
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -550,6 +629,14 @@ export default function ExamSelectionPage() {
                     © 2024 BAC IELTS ACADEMY • OFFICIAL EXAMINATION PORTAL
                 </div>
             </footer>
+
+            {/* Animation keyframes */}
+            <style jsx global>{`
+                @keyframes slideUp {
+                    from { opacity: 0; transform: translateY(30px) scale(0.95); }
+                    to { opacity: 1; transform: translateY(0) scale(1); }
+                }
+            `}</style>
         </div>
     );
 }
